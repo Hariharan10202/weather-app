@@ -126,7 +126,6 @@ const Weather = ({ isWeather, pending }: WeatherProps) => {
           ) : (
             <div className="w-full h-full flex flex-col gap-y-5 justify-center items-center">
               <DynamicIcon />
-              <p className="text-[20px]">Get Weather Now!</p>
             </div>
           )}
         </motion.div>

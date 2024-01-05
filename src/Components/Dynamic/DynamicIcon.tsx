@@ -79,6 +79,19 @@ const DynamicIcon = () => {
           <li></li>
         </ul>
       </div>
+      <div className="text">
+        <ul>
+          <li>Mostly Sunny</li>
+          <li>Partly Sunny</li>
+          <li>Partly Cloudy</li>
+          <li>Mostly Cloudy</li>
+          <li>Cloudy</li>
+          <li>Hazy</li>
+          <li>Thunderstorm</li>
+          <li>Rain</li>
+          <li>Sleet</li>
+        </ul>
+      </div>
     </div>
   );
 };
