@@ -74,7 +74,7 @@ const WeatherImage = ({ type }: typeProps) => {
       return <Snowy />;
 
     default:
-      return <Rainy />;
+      return <Cloudy />;
   }
 };
 
