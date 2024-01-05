@@ -1,8 +1,9 @@
 import Input from "./Input";
 import { getWeatherAPI } from "../service/api";
 import { Item } from "../types";
-import toast, { Toaster } from "react-hot-toast";
 import { FiSearch } from "react-icons/fi";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 let searches: any = [];
 
@@ -11,40 +12,26 @@ export interface InputProps {
   selectedCity?: string;
   setIsWeather: React.Dispatch<React.SetStateAction<any>>;
   setPending: React.Dispatch<React.SetStateAction<boolean>>;
+  isWeather: any | null;
 }
 
-let tempCity: undefined | string;
 const Search = ({
   selectedCity,
   setSelectedCity,
   setIsWeather,
   setPending,
+  isWeather,
 }: InputProps) => {
+  const [error, setError] = useState<string>("");
   const handleSearch = async () => {
-    if (selectedCity) {
-      if (tempCity !== selectedCity) tempCity = selectedCity;
-      else {
-        toast.custom(
-          () => (
-            <div
-              style={{
-                padding: "10px",
-                borderRadius: "5px",
-                color: "white",
-                backgroundColor: "#363636",
-              }}
-            >
-              No changes Made
-            </div>
-          ),
-          {
-            position: "top-right",
-            duration: 4000,
-          }
-        );
-        return;
-      }
-
+    if (
+      selectedCity &&
+      isWeather &&
+      isWeather.name &&
+      selectedCity.toLowerCase().trim() === isWeather.name.toLowerCase().trim()
+    ) {
+      setError("No Changes");
+    } else if (selectedCity) {
       searches = [];
       setPending(true);
       const response = await getWeatherAPI(selectedCity);
@@ -74,35 +61,23 @@ const Search = ({
 
         if (res) {
           if (res.status === 404) {
-            toast.error("Invalid city");
-            tempCity = "";
-          } else if (res.status === 401) toast.error("Access denied");
-        } else toast.error("Something went wrong");
+            setError("Invalid City");
+          } else if (res.status === 401) setError("Access denied");
+        } else setError("Something went wrong");
       }
     } else {
-      toast.error("Enter the City");
+      setError("City is required!");
     }
     setPending(false);
   };
 
   return (
     <div className="flex items-center justify-start  gap-y-2 flex-col">
-      <Toaster
-        position="top-right"
-        reverseOrder={false}
-        toastOptions={{
-          duration: 5000,
-          style: {
-            background: "#363636",
-            fontSize: "14px",
-            color: "#fff",
-          },
-        }}
-      />
       <Input
         setSelectedCity={setSelectedCity}
         selectedCity={selectedCity}
         handleSearch={handleSearch}
+        setError={setError}
       >
         <div
           onClick={handleSearch}
@@ -111,6 +86,20 @@ const Search = ({
           <FiSearch className="text-white" />
         </div>
       </Input>
+      <>
+        {error && (
+          <AnimatePresence>
+            <motion.p
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="text-red-400"
+            >
+              {error}
+            </motion.p>
+          </AnimatePresence>
+        )}
+      </>
     </div>
   );
 };

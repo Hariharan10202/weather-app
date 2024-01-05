@@ -5,6 +5,7 @@ export interface InputProps {
   selectedCity: string | undefined;
   children: React.ReactNode;
   handleSearch: () => {};
+  setError: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Input = ({
@@ -12,8 +13,10 @@ const Input = ({
   selectedCity,
   children,
   handleSearch,
+  setError,
 }: InputProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setError("");
     setSelectedCity(event.target.value);
   };
 

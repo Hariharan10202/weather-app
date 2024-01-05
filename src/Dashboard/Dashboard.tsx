@@ -19,6 +19,7 @@ const Dashboard = () => {
             setSelectedCity={setSelectedCity}
             setIsWeather={setIsWeather}
             setPending={setPending}
+            isWeather={isWeather}
           />
           <div className="flex gap-6 flex-wrap justify-center items-center">
             <Weather pending={pending} isWeather={isWeather} />
@@ -26,10 +27,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div>
-          <RecentSearch
-            setSelectedCity={setSelectedCity}
-            setIsWeather={setIsWeather}
-          />
+          <RecentSearch />
         </div>
       </div>
     </div>

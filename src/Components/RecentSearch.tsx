@@ -3,12 +3,7 @@ import { motion } from "framer-motion";
 import { getTimeAgo } from "../timeago";
 import WeatherImage from "./WeatherImage";
 
-export interface WeatherProps {
-  setIsWeather: React.Dispatch<React.SetStateAction<any>>;
-  setSelectedCity: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const RecentSearch = ({ setSelectedCity, setIsWeather }: WeatherProps) => {
+const RecentSearch = () => {
   const [recent, setRecent] = useState([]);
 
   useLayoutEffect(() => {
@@ -32,12 +27,6 @@ const RecentSearch = ({ setSelectedCity, setIsWeather }: WeatherProps) => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              onClick={() => {
-                if (setIsWeather) {
-                  setSelectedCity("");
-                  setIsWeather(data);
-                }
-              }}
             >
               <div className="flex gap-x-2 items-center bg-opacity-10 backdrop-filter backdrop-blur-lg border border-opacity-10 border-white rounded-[20px] py-2 px-3 shadow-2xl">
                 <div className="w-8 h-8 xl:w-20 xl:h-20 lg:w-16 lg:h-16 md:w-10 md:h-10">
