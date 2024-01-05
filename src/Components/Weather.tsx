@@ -56,7 +56,7 @@ const Weather = ({ isWeather, pending }: WeatherProps) => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="flex justify-between items-start bg-opacity-10 backdrop-filter backdrop-blur-lg border border-opacity-10 border-white rounded-[30px] p-3 xl:p-5 lg-p-4 md:p-4 shadow-2xl text-white w-[250px] 2xl:w-[500px] md:w-[400px] sm:[300px] h-[300px]"
+          className="flex justify-between items-center bg-opacity-10 backdrop-filter backdrop-blur-lg border border-opacity-10 border-white rounded-[30px] p-5 xl:p-5 lg-p-4 md:p-4 shadow-2xl text-white w-[300px] 2xl:w-[500px] md:w-[400px] sm:w-[300px] h-[240px] 2xl:h-[300px] lg:h-[260px] sm:h-[250px]"
         >
           {isWeather ? (
             <>
@@ -65,7 +65,7 @@ const Weather = ({ isWeather, pending }: WeatherProps) => {
                   <span className="text-[12px] font-bold sm:text-[14px]">
                     {formatTime(currentTime)}
                   </span>
-                  <span className="text-[12px] font-medium capitalize md:text-[16px]">
+                  <span className="text-[14px] font-medium capitalize md:text-[16px]">
                     {getWelcomeMessage(currentTime)}
                   </span>
                 </div>
@@ -82,7 +82,7 @@ const Weather = ({ isWeather, pending }: WeatherProps) => {
                   </h2>
                 </div>
                 <div className="flex gap-5 items-center">
-                  <span className="text-[20px] xl:text-[60px] lg:text-[50px] md:text-[30px] font-[100]">
+                  <span className="text-[30px] 2xl:text-[60px] lg:text-[40px] sm:text-[30px] font-[100]">
                     {isWeather.main.temp} °C
                   </span>
                   <div>
