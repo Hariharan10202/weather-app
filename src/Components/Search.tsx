@@ -48,10 +48,10 @@ const Search = ({
       searches = [];
       setPending(true);
       const response = await getWeatherAPI(selectedCity);
-      setPending(false);
       const { status, data } = response as { status: number; data: any };
 
       if (status === 200) {
+        setPending(false);
         setIsWeather(data);
         data.timeStamp = Date.now();
         const storageData = localStorage.getItem("weather");
@@ -82,6 +82,7 @@ const Search = ({
     } else {
       toast.error("Enter the City");
     }
+    setPending(false);
   };
 
   return (
