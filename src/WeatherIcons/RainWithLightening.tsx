@@ -1,4 +1,4 @@
-const RainingAndLightening = () => {
+const RainWithLightening = () => {
   return (
     <div className="element">
       <svg
@@ -78,46 +78,10 @@ const RainingAndLightening = () => {
               calcMode="linear"
             />
           </g>
-          <g id="Rain_6">
-            <path
-              id="Rain_6_right"
-              className="fill-white"
-              d="M36.3,51.9c0,1.7-1.4,3.1-3.1,3.1c-1.7,0-3.1-1.4-3.1-3.1c0-1.7,3.1-7.8,3.1-7.8 S36.3,50.2,36.3,51.9z"
-            />
-            <path
-              id="Rain_6_mid"
-              className="fill-white"
-              d="M26.4,51.9c0,1.7-1.4,3.1-3.1,3.1c-1.7,0-3.1-1.4-3.1-3.1c0-1.7,3.1-7.8,3.1-7.8 S26.4,50.2,26.4,51.9z"
-            />
-            <path
-              id="Rain_6_left"
-              className="fill-white"
-              d="M15.7,51.9c0,1.7-1.4,3.1-3.1,3.1s-3.1-1.4-3.1-3.1c0-1.7,3.1-7.8,3.1-7.8 S15.7,50.2,15.7,51.9z"
-            />
-            <animateTransform
-              attributeName="transform"
-              attributeType="XML"
-              dur="1s"
-              keyTimes="0;1"
-              repeatCount="indefinite"
-              type="translate"
-              values="0 0;0 10"
-              calcMode="linear"
-            ></animateTransform>
-            <animate
-              attributeName="opacity"
-              attributeType="XML"
-              dur="1s"
-              keyTimes="0;1"
-              repeatCount="indefinite"
-              values="1;0"
-              calcMode="linear"
-            />
-          </g>
         </g>
       </svg>
     </div>
   );
 };
 
-export default RainingAndLightening;
+export default RainWithLightening;

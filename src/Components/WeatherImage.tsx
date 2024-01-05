@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import ClearNight from "../WeatherIcons/ClearNight";
 import ClearSky from "../WeatherIcons/ClearSky";
 import Cloudy from "../WeatherIcons/Cloudy";
@@ -6,39 +7,51 @@ import Haze from "../WeatherIcons/Haze";
 import Mist from "../WeatherIcons/Mist";
 import NightHaze from "../WeatherIcons/NightHaze";
 import NightMist from "../WeatherIcons/NightMist";
-import RainingAndLightening from "../WeatherIcons/RainingAndLightening";
 import Rainy from "../WeatherIcons/Rainy";
 import Smoke from "../WeatherIcons/Smoke";
+import Snowy from "../WeatherIcons/Snowy";
+import Lightening from "../WeatherIcons/Lightening";
+import RainWithLightening from "../WeatherIcons/RainWithLightening";
 
 interface typeProps {
   type: string;
 }
 
 const WeatherImage = ({ type }: typeProps) => {
+  const [isDaytime, setIsDaytime] = useState<boolean>(true);
+
+  useEffect(() => {
+    const currentHour = new Date().getHours();
+    const startOfDaytime = 6;
+    const endOfDaytime = 18;
+
+    setIsDaytime(currentHour >= startOfDaytime && currentHour < endOfDaytime);
+  }, []);
+
   switch (type) {
     case "Clouds":
-      if (new Date().getHours() + 1 > 19 && new Date().getHours() + 1 < 6) {
+      if (isDaytime) {
         return <Cloudy />;
       } else {
         return <CloudyWithMoon />;
       }
 
     case "Clear":
-      if (new Date().getHours() + 1 > 19 && new Date().getHours() + 1 < 6) {
-        return <ClearNight />;
-      } else {
+      if (isDaytime) {
         return <ClearSky />;
+      } else {
+        return <ClearNight />;
       }
 
     case "Mist":
-      if (new Date().getHours() + 1 > 19 && new Date().getHours() + 1 < 6) {
+      if (isDaytime) {
         return <Mist />;
       } else {
         return <NightMist />;
       }
 
     case "Haze":
-      if (new Date().getHours() + 1 > 19 && new Date().getHours() + 1 < 6) {
+      if (isDaytime) {
         return <Haze />;
       } else {
         return <NightHaze />;
@@ -48,14 +61,20 @@ const WeatherImage = ({ type }: typeProps) => {
       return <Smoke />;
 
     case "Rain":
-      if (new Date().getHours() + 1 > 19 && new Date().getHours() + 1 < 6) {
-        return <RainingAndLightening />;
+      if (isDaytime) {
+        return <RainWithLightening />;
       } else {
         return <Rainy />;
       }
-      break;
+
+    case "Thunderstorm":
+      return <Lightening />;
+
+    case "Snow":
+      return <Snowy />;
 
     default:
+      return <Rainy />;
   }
 };
 

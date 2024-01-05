@@ -12,8 +12,8 @@ const Dashboard = () => {
 
   return (
     <div className={styles.background}>
-      <div className="flex flex-col gap-y-3 items-center justify-center m-auto p-5 h-full relative">
-        <div className="flex flex-col gap-y-3">
+      <div className="flex flex-col gap-y-5 items-center justify-center m-auto p-5 h-full relative">
+        <div className="flex flex-col gap-y-5">
           <Search
             selectedCity={selectedCity}
             setSelectedCity={setSelectedCity}
@@ -26,7 +26,10 @@ const Dashboard = () => {
           </div>
         </div>
         <div>
-          <RecentSearch setIsWeather={setIsWeather} />
+          <RecentSearch
+            setSelectedCity={setSelectedCity}
+            setIsWeather={setIsWeather}
+          />
         </div>
       </div>
     </div>

@@ -4,11 +4,22 @@ export interface InputProps {
   setSelectedCity: React.Dispatch<React.SetStateAction<string>>;
   selectedCity: string | undefined;
   children: React.ReactNode;
+  handleSearch: () => {};
 }
 
-const Input = ({ setSelectedCity, selectedCity, children }: InputProps) => {
+const Input = ({
+  setSelectedCity,
+  selectedCity,
+  children,
+  handleSearch,
+}: InputProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedCity(event.target.value);
+  };
+
+  const triggerSearch = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter") handleSearch();
+    else return;
   };
 
   return (
@@ -20,6 +31,7 @@ const Input = ({ setSelectedCity, selectedCity, children }: InputProps) => {
           placeholder="Enter the City"
           className="px-3 py-1 bg-transparent outline-none border-none text-[12px] xl:text-[12px] placeholder:italic placeholder:text-gray-300"
           onChange={handleChange}
+          onKeyDown={triggerSearch}
         />
         {children}
       </div>

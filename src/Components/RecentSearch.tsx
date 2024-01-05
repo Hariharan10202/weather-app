@@ -5,9 +5,10 @@ import WeatherImage from "./WeatherImage";
 
 export interface WeatherProps {
   setIsWeather: React.Dispatch<React.SetStateAction<any>>;
+  setSelectedCity: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const RecentSearch = ({ setIsWeather }: WeatherProps) => {
+const RecentSearch = ({ setSelectedCity, setIsWeather }: WeatherProps) => {
   const [recent, setRecent] = useState([]);
 
   useLayoutEffect(() => {
@@ -19,12 +20,12 @@ const RecentSearch = ({ setIsWeather }: WeatherProps) => {
   }, [localStorage.getItem("weather")]);
 
   return (
-    <div className="w-fit cursor-pointer flex flex-col items-center">
+    <div className="w-fit cursor-pointer flex flex-col gap-y-3 items-center mb-5">
       <div>
         <h1 className="text-[20px] text-white">Recent</h1>
       </div>
       {recent.length ? (
-        <div className="flex gap-x-3 gap-y-4 items-center flex-wrap justify-center">
+        <div className="flex gap-x-3 gap-y-5 items-center flex-wrap justify-center">
           {recent.map((data: any) => (
             <motion.div
               key={data.name}
@@ -33,6 +34,7 @@ const RecentSearch = ({ setIsWeather }: WeatherProps) => {
               exit={{ opacity: 0, y: -20 }}
               onClick={() => {
                 if (setIsWeather) {
+                  setSelectedCity("");
                   setIsWeather(data);
                 }
               }}
@@ -50,14 +52,14 @@ const RecentSearch = ({ setIsWeather }: WeatherProps) => {
                   </span>
                 </div>
               </div>
-              <p className="text-gray-500 font-medium flex justify-end pr-2 text-[10px]">
+              <p className="text-gray-300 font-normal flex justify-end pr-2 text-[10px]">
                 {getTimeAgo(data.timeStamp)}
               </p>
             </motion.div>
           ))}
         </div>
       ) : (
-        <h1 className="text-gray-500 text-[16px]">No recent searches</h1>
+        <h1 className="text-gray-300 text-[16px]">No recent searches</h1>
       )}
     </div>
   );

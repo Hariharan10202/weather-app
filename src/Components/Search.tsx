@@ -3,7 +3,6 @@ import { getWeatherAPI } from "../service/api";
 import { Item } from "../types";
 import toast, { Toaster } from "react-hot-toast";
 import { FiSearch } from "react-icons/fi";
-import DynamicIcon from "./Dynamic/DynamicIcon";
 
 let searches: any = [];
 
@@ -22,7 +21,6 @@ const Search = ({
   setPending,
 }: InputProps) => {
   const handleSearch = async () => {
-    setIsWeather(null);
     if (selectedCity) {
       if (tempCity !== selectedCity) tempCity = selectedCity;
       else {
@@ -100,8 +98,11 @@ const Search = ({
           },
         }}
       />
-      <DynamicIcon />
-      <Input setSelectedCity={setSelectedCity} selectedCity={selectedCity}>
+      <Input
+        setSelectedCity={setSelectedCity}
+        selectedCity={selectedCity}
+        handleSearch={handleSearch}
+      >
         <div
           onClick={handleSearch}
           className="flex items-center justify-center border-l-2 p-2 cursor-pointer bg-gray-800 rounded-tr-full rounded-br-full"

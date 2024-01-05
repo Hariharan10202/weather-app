@@ -8,6 +8,8 @@ import { FaTemperatureArrowDown } from "react-icons/fa6";
 import WeatherImage from "./WeatherImage";
 import WeatherLoading from "./WeatherLoading";
 
+import DynamicIcon from "./Dynamic/DynamicIcon";
+
 export interface WeatherProps {
   isWeather: any | null;
   pending: boolean;
@@ -50,14 +52,14 @@ const Weather = ({ isWeather, pending }: WeatherProps) => {
   return (
     <>
       <AnimatePresence>
-        {isWeather && (
-          <>
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="flex justify-center items-start bg-opacity-10 backdrop-filter backdrop-blur-lg border border-opacity-10 border-white rounded-[30px] p-3 xl:p-5 lg-p-4 md:p-4 shadow-2xl text-white"
-            >
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="flex justify-between items-start bg-opacity-10 backdrop-filter backdrop-blur-lg border border-opacity-10 border-white rounded-[30px] p-3 xl:p-5 lg-p-4 md:p-4 shadow-2xl text-white w-[250px] 2xl:w-[500px] md:w-[400px] sm:[300px] h-[300px]"
+        >
+          {isWeather ? (
+            <>
               <div>
                 <div className="flex flex-col gap-y-2">
                   <span className="text-[12px] font-bold sm:text-[14px]">
@@ -69,13 +71,13 @@ const Weather = ({ isWeather, pending }: WeatherProps) => {
                 </div>
 
                 <div className="flex flex-col gap-y-2">
-                  <div className="flex items-center gap-x-1 mt-4">
+                  <div className="flex items-center gap-x-1 mt-2">
                     <FaLocationDot size={20} />
                     <span className="max-w-[200px] font-bold text-[24px] text-zinc-400 truncate">
                       {isWeather.name}, {isWeather.sys.country}
                     </span>
                   </div>
-                  <h2 className="font-semibold text-[14px] xl:text-[20px] lg:text-[18px] md:text-[16px] capitalize italic">
+                  <h2 className="font-medium text-[14px] xl:text-[20px] lg:text-[18px] md:text-[16px] capitalize">
                     {isWeather.weather[0]?.description}
                   </h2>
                 </div>
@@ -102,14 +104,16 @@ const Weather = ({ isWeather, pending }: WeatherProps) => {
                     <span>
                       <MdOutlineWaterDrop size={20} />
                     </span>
-                    <span className="flex items-center gap-2 ml-4">
-                      <span className="text-[20px]">
-                        {isWeather.wind.speed} mph
+                    <div className="flex gap-2 items-center">
+                      <span className="flex items-center gap-2 ml-4">
+                        <span className="text-[20px]">
+                          {isWeather.wind.speed} mph
+                        </span>
+                        <span className="w-8 h-8 flex items-center">
+                          <FaWind />
+                        </span>
                       </span>
-                      <span className="w-16 h-16 flex items-center">
-                        <FaWind />
-                      </span>
-                    </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -118,9 +122,14 @@ const Weather = ({ isWeather, pending }: WeatherProps) => {
                   <WeatherImage type={isWeather.weather[0].main} />
                 </div>
               </div>
-            </motion.div>
-          </>
-        )}
+            </>
+          ) : (
+            <div className="w-full h-full flex flex-col gap-y-5 justify-center items-center">
+              <DynamicIcon />
+              <p className="text-[20px]">Get Weather Now!</p>
+            </div>
+          )}
+        </motion.div>
       </AnimatePresence>
     </>
   );
