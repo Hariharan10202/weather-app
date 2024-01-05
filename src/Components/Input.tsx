@@ -75,7 +75,7 @@ const Input = ({ setSelectedCity, selectedCity, children }: InputProps) => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://geodb-free-service.wirefreethought.com/v1/geo/places?limit=10&sort=name&offset=${view}&types=CITY&namePrefix=${debouncedTerm}`
+          `https://geodb-free-service.wirefreethought.com/v1/geo/places?limit=10&sort=name&offset=${view}&types=CITY&namePrefix=${debouncedTerm}`
         );
 
         const newData: Item[] = response.data.data;
